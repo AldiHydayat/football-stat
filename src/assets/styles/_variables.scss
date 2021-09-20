@@ -1,0 +1,30 @@
+@import url(https://fonts.googleapis.com/css2?family=Prompt&family=Reem+Kufi&display=swap);
+
+$prompt: "Prompt", sans-serif;
+$reem: "Reem Kufi", sans-serif;
+
+@mixin sm {
+  @media (max-width: 576px) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin xxl {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}
