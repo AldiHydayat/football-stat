@@ -58,6 +58,9 @@
         </ul>
       </div>
       <div class="standing">
+        <span id="loading" v-if="isLoading">
+          <div class="loader"></div>
+        </span>
         <standing-table :standing="standing" :league="currentLeague" />
       </div>
     </div>
@@ -77,9 +80,11 @@ export default {
       standing: [],
       currentLeague: "",
       currentLeagueCode: "PL",
+      isLoading: false,
     };
   },
   async created() {
+    this.isLoading = true;
     await axios
       .get(
         `http://api.football-data.org/v2/competitions/${this.currentLeagueCode}/standings`,
@@ -91,10 +96,14 @@ export default {
         this.currentLeague = res.data.competition.name;
         this.standing = res.data.standings[0].table;
         this.currentLeagueCode = res.data.competition.code;
+      })
+      .finally(() => {
+        this.isLoading = false;
       });
   },
   methods: {
     async changeLeague(id) {
+      this.isLoading = true;
       await axios
         .get(`http://api.football-data.org/v2/competitions/${id}/standings`, {
           headers: { "X-Auth-Token": "b48408aabc3d46d2b0fc90e61f2d6dd8" },
@@ -103,6 +112,9 @@ export default {
           this.currentLeague = res.data.competition.name;
           this.standing = res.data.standings[0].table;
           this.currentLeagueCode = res.data.competition.code;
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
   },
@@ -142,7 +154,38 @@ section {
     }
 
     .standing {
+      position: relative;
       padding-top: 15px;
+
+      #loading {
+        background-color: rgba($color: #c4c4c4, $alpha: 0.5);
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        justify-content: center;
+
+        .loader {
+          margin-top: 50px;
+          border: 10px solid #f3f3f3;
+          border-top: 10px solid #3498db;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
     }
   }
 }

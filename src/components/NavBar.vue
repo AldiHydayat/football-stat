@@ -4,7 +4,7 @@
       <ul :class="[toggle ? 'sidebar-active' : '']">
         <li><a href="#">Home</a></li>
         <li><a href="#standings">Standings</a></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="#matches">Matches</a></li>
         <li><a href="#">Link</a></li>
         <li><a href="#">Link</a></li>
       </ul>

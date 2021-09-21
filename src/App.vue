@@ -1,12 +1,14 @@
 <template>
   <home />
   <standings />
+  <matches />
   <Footer />
 </template>
 
 <script>
 import Home from "./pages/Home.vue";
 import Standings from "./pages/Standings.vue";
+import Matches from "./pages/Matches.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
@@ -15,6 +17,7 @@ export default {
     Home,
     Standings,
     Footer,
+    Matches,
   },
 };
 </script>
